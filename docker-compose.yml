@@ -3,8 +3,8 @@ services:
   router:
     image: seges/nginx-consul:1.9.0
     volumes:
-      - ./conf: /etc/consul-template/conf/
-      - ./templates: /etc/consul-template/templates/
+      - ./conf: /etc/consul-template/conf/:Z
+      - ./templates: /etc/consul-template/templates/:Z
     ports:
       - 80:80
       - 443:443
