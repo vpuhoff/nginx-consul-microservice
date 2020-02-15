@@ -2,7 +2,7 @@ version: "3.3"
 services:
   consul-server-1: &consul-server
     image: consul:latest
-    command: "agent -server -retry-join consul-server-bootstrap -client 0.0.0.0"
+    command: "agent -server -retry-join consul-server -client 0.0.0.0"
     networks:
       - global
   
