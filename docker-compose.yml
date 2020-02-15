@@ -3,8 +3,12 @@ services:
   router:
     image: seges/nginx-consul:1.9.0
     volumes:
-      - ./conf: /etc/consul-template/conf/:Z
-      - ./templates: /etc/consul-template/templates/:Z
+      - type: bind
+        source: ./conf
+        target: /etc/consul-template/conf/
+      - type: bind
+        source: ./templates
+        target: /etc/consul-template/templates/
     ports:
       - 80:80
       - 443:443
@@ -16,7 +20,9 @@ services:
       context: ./
       dockerfile: service.dockerfile
     volumes:
-      - ./conf: /etc/config/
+      - type: bind
+        source: ./conf
+        target: /etc/config/
     environment:
       - SERVICE_NAME=micro
       - SERVICE_TAGS=global,api
