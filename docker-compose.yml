@@ -49,6 +49,8 @@ services:
     environment:
       - SERVICE_NAME=micro
       - SERVICE_TAGS=global,api
+      - CONSUL_IP=consul-server
+      - CONSUL_PORT=8500
     networks:
       - global
 
