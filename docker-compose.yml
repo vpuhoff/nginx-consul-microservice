@@ -10,8 +10,8 @@ services:
         source: ./templates
         target: /etc/consul-template/templates/
     ports:
-      - 80:80
-      - 443:443
+      - 800:80
+      - 4430:443
     networks:
       - global
 
