@@ -1,14 +1,10 @@
 version: "3.3"
 services:
-  configuration:
-    build:
-      context: ./
-      dockerfile: configuration.dockerfile
-
   router:
     image: seges/nginx-consul:1.9.0
-    volumes_from:
-      - configuration
+    volumes:
+      - ./conf: /etc/consul-template/conf/
+      - ./templates: /etc/consul-template/templates/
     ports:
       - 80:80
       - 443:443
@@ -19,8 +15,8 @@ services:
     build:
       context: ./
       dockerfile: service.dockerfile
-    volumes_from:
-      - configuration
+    volumes:
+      - ./conf: /etc/config/
     environment:
       - SERVICE_NAME=micro
       - SERVICE_TAGS=global,api
