@@ -1,22 +1,31 @@
-configuration:
-  build:
-    context: ./
-    dockerfile: configuration.dockerfile
+version: "3.7"
+services:
+  configuration:
+    build:
+      context: ./
+      dockerfile: configuration.dockerfile
 
-router:
-  image: seges/nginx-consul:1.9.0
-  volumes_from:
-    - configuration
-  ports:
-    - 80:80
-    - 443:443
+  router:
+    image: seges/nginx-consul:1.9.0
+    volumes_from:
+      - configuration
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - global
 
-microservice:
-  build:
-    context: ./
-    dockerfile: service.dockerfile
-  volumes_from:
-    - configuration
-  environment:
-    - SERVICE_NAME=micro
-    - SERVICE_TAGS=global,api
+  microservice:
+    build:
+      context: ./
+      dockerfile: service.dockerfile
+    volumes_from:
+      - configuration
+    environment:
+      - SERVICE_NAME=micro
+      - SERVICE_TAGS=global,api
+    networks:
+      - global
+
+networks:
+  global:
